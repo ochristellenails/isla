@@ -1,0 +1,52 @@
+:root {
+  color-scheme: light;
+  background: #fffaf4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #fffaf4;
+}
+
+.portrait {
+  display: grid;
+  width: 100vw;
+  height: 100svh;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+  background: #fffaf4;
+}
+
+.portrait__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@supports not (height: 100svh) {
+  .portrait {
+    height: 100vh;
+  }
+}
+
+@media (max-aspect-ratio: 4/5) {
+  .portrait__image {
+    object-position: center center;
+  }
+}
