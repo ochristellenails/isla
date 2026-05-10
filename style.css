@@ -47,7 +47,7 @@ body {
 
 @media (max-aspect-ratio: 4/5) {
   .portrait__image {
-    object-fit: contain;
-    object-position: center center;
+    object-fit: cover;
+    object-position: 52% bottom;
   }
 }
