@@ -46,8 +46,13 @@ body {
 }
 
 @media (max-aspect-ratio: 4/5) {
+  .portrait {
+    align-items: end;
+  }
+
   .portrait__image {
+    height: 94%;
     object-fit: cover;
-    object-position: 52% bottom;
+    object-position: 42% bottom;
   }
 }
