@@ -20,6 +20,7 @@ body {
 }
 
 .portrait {
+  position: relative;
   display: grid;
   width: 100vw;
   height: 100svh;
@@ -27,16 +28,40 @@ body {
   place-items: center;
   overflow: hidden;
   background: #fffaf4;
+  cursor: pointer;
+  outline: none;
+  isolation: isolate;
+  touch-action: manipulation;
 }
 
-.portrait__image {
+.portrait:focus-visible {
+  box-shadow: inset 0 0 0 4px rgb(255 255 255 / 0.8);
+}
+
+.portrait__image,
+.portrait__movie {
+  grid-area: 1 / 1;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center bottom;
   user-select: none;
+}
+
+.portrait__image {
   -webkit-user-drag: none;
+}
+
+.portrait__movie {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 900ms ease;
+}
+
+.portrait--playing .portrait__movie {
+  opacity: 1;
 }
 
 @supports not (height: 100svh) {
@@ -46,7 +71,8 @@ body {
 }
 
 @media (max-aspect-ratio: 4/5) {
-  .portrait__image {
+  .portrait__image,
+  .portrait__movie {
     width: 115%;
     height: 85%;
     object-fit: cover;
