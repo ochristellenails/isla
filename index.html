@@ -12,8 +12,58 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <main class="portrait" aria-label="Isla portrait">
+    <main class="portrait" aria-label="Isla portrait animation" tabindex="0">
       <img class="portrait__image" src="isla.png" alt="Watercolor portrait artwork of Isla.">
+      <video
+        class="portrait__movie"
+        src="isla_movie.mp4"
+        preload="auto"
+        playsinline
+        aria-hidden="true"
+      ></video>
     </main>
+    <script>
+      const portrait = document.querySelector(".portrait");
+      const movie = document.querySelector(".portrait__movie");
+
+      let movieVisible = false;
+
+      function hideMovie() {
+        movieVisible = false;
+        portrait.classList.remove("portrait--playing");
+        movie.pause();
+      }
+
+      async function showMovie() {
+        movieVisible = true;
+        movie.currentTime = 0;
+        portrait.classList.add("portrait--playing");
+
+        try {
+          await movie.play();
+        } catch {
+          hideMovie();
+        }
+      }
+
+      function toggleMovie() {
+        if (movieVisible) {
+          hideMovie();
+          return;
+        }
+
+        showMovie();
+      }
+
+      portrait.addEventListener("click", toggleMovie);
+      portrait.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleMovie();
+        }
+      });
+
+      movie.addEventListener("ended", hideMovie);
+    </script>
   </body>
 </html>
